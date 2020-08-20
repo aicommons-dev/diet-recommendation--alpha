@@ -60,8 +60,6 @@ def describe_food_class(food):
     result = Foodservoire.objects.filter(food_class__icontains=food)
     if len(result) > 1:
         return result[0].balanced, result[0].nutrients_absent
-    elif len(result) == 1:
-        return result.balanced, result.nutrients_absent
     return None, None
 
 
@@ -78,9 +76,7 @@ def process_photo(img):
 
 
 def get_activity_level(label, gender, category):
-    activity = Activity.objects.all()
-    # activity = Activity.objects.filter(label=label, gender=gender, category=category)
-
+    activity = Activity.objects.filter(label=label, gender=gender, category=category)
     if activity is not None:
         return activity[0].value
     return 0
