@@ -32,7 +32,9 @@ def upload_photo(request):
         # Ideal Body weight = Height(cm) - 100
         # convert height from feet to cm and get calculate ideal body weight
         ideal_body_weight = (30.48 * int(height)) - 100
-        ideal_calories = ideal_body_weight * get_activity_level(activity, gender, category)
+        activity_level = get_activity_level(activity, gender, category)
+        print(activity_level)
+        ideal_calories = ideal_body_weight * activity_level
         calories = 'Your ideal daily calories intake is ' + str(ideal_calories)
 
         # get food class from the model
@@ -76,8 +78,9 @@ def process_photo(img):
 
 
 def get_activity_level(label, gender, category):
-    activity = Activity.objects.filter(label=label, gender=gender, category=category)
+    activity = Activity.objects.all()
+    # activity = Activity.objects.filter(label=label, gender=gender, category=category)
 
     if activity is not None:
-        return activity.value
+        return activity[0].value
     return 0
