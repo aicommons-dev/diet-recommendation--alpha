@@ -1,0 +1,1 @@
+web: gunicorn --chdir ./foodie foodie.wsgi --log-file -
