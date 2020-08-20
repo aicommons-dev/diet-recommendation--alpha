@@ -17,81 +17,12 @@
 
                     </div>
                     <div class="col border border-success rounded bg-light m-4 p-4">
-                        <span id="registration-header" style="color:#058438; font-weight:bold;">Get Started with us today</span>
-                        <form method="post" action="registration/">
-                            <!-- email -->
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" placeholder="username@mail.com">
-                            </div>
-
-                            <!-- password -->
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="password1">Password</label>
-                                    <input type="password" class="form-control" id="password1">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="password2">Password</label>
-                                    <input type="password" class="form-control" id="password2">
-                                </div>
-                            </div>
-
-                            <!-- age and height -->
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="Weight">Weight</label>
-                                    <input type="number" class="form-control" id="weight">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="height">Height</label>
-                                    <input type="number" class="form-control" id="height">
-                                </div>
-                            </div>
-
-
-                            <!-- Gender  and age -->
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label>Gender</label><br/>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gender" id="male"
-                                                value="Male"/> Male
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gender" id="female"
-                                                value="Female"> Female
-                                        </div>
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label for="age">Age</label>
-                                    <input type="number" class="form-control" id="age">
-                                </div>
-                            </div>
-
-                            <!-- Health condition -->
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label>Any health condition?</label><br/>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="health" id="health-yes"
-                                                value="Yes"/> Yes
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="health" id="health-no"
-                                                value="No"> No
-                                        </div>
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label for="age">Specify health conditions separated by comma</label>
-                                    <input type="text" class="form-control" id="health-condition">
-                                </div>
-                            </div>
-
-                            <button type="submit" class="btn btn-success">Register</button>
-                        </form>
+                        <span id="registration-header" style="color:#058438; font-weight:bold;">Get Started by uploading a picture of a meal.</span>
+                        <button type="button" class="btn btn-success"  data-toggle="modal" data-target="#basicExampleModal">
+                            Get Started
+                        </button>
+                        <hr/>
+                        {{name}}
                     </div>
                 </div>
             </div>
@@ -104,7 +35,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Upload the photo of the food to analyze it nutritional content</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Getting started towards a healthier lifestyle.</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -113,9 +44,48 @@
         {% csrf_token %}
       <div class="modal-body">
 
+      <!-- activity level -->
+        <div class="form-group">
+            <label for="activity">Activity Level</label>
+                <select name="activity" class="form-control">
+                    <option>choose one</option>
+                    <option value="1">Sedentary</option>
+                    <option value="2">Moderately Active</option>
+                    <option value="3">Active</option>
+                </select>
+        </div>
+
+        <!-- age and height -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="Weight">Weight</label>
+                <input type="number" class="form-control" id="weight">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="height">Height</label>
+                <input type="number" class="form-control" id="height">
+            </div>
+        </div>
+
+        <!-- Gender  and age -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="age">Gender</label>
+                <select name="gender" class="form-control">
+                    <option>Select gender</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="age">Age</label>
+                <input type="number" class="form-control" id="age">
+            </div>
+        </div>
+
         <!-- upload food -->
         <div class="form-group">
-            <label for="photo">Photo</label>
+            <label for="photo">Image of Food</label>
             <input type="file" class="form-control" name="photo" id="photo" required/>
         </div>
 

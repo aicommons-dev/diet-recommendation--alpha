@@ -23,11 +23,17 @@ def dashboard(request):
 
 def upload_photo(request):
     if request.method == 'POST' and request.FILES['photo']:
+        # parse the photo of the food uploaded
         img = request.FILES['photo']
-        img_pred = process_photo(img)
-        print(img_pred)
 
-        return redirect('home')
+        # get food class from the model
+        food_class = process_photo(img)
+
+        prediction = {
+            'name': food_class
+        }
+
+        return render(request, 'webapp/home.html', prediction)
 
     # display empty form if new request  or filled form with error messages when an invalid was submitted
     return render(request, 'webapp/home.html')
