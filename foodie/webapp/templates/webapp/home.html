@@ -17,12 +17,20 @@
 
                     </div>
                     <div class="col border border-success rounded bg-light m-4 p-4">
-                        <span id="registration-header" style="color:#058438; font-weight:bold;">Get Started by uploading a picture of a meal.</span>
+                        <span id="registration-header" style="color:#058438; font-weight:bold;">Get Started by uploading a photo of your meal.</span>
                         <button type="button" class="btn btn-success"  data-toggle="modal" data-target="#basicExampleModal">
                             Get Started
                         </button>
                         <hr/>
-                        {{name}}
+
+                        <ul class="list-group">
+                          <li class="list-group-item">Analysis of your meal</li>
+                          <li class="list-group-item list-group-item-primary">Food class: {{name}}</li>
+                          <li class="list-group-item list-group-item-success">Balanced Diet: {{balanced}}</li>
+                          <li class="list-group-item list-group-item-danger">Missing Nutrients: {{absent}}</li>
+                          <li class="list-group-item list-group-item-info">Additional Information: {{calories}}</li>
+                        </ul>
+
                     </div>
                 </div>
             </div>
@@ -49,28 +57,33 @@
             <label for="activity">Activity Level</label>
                 <select name="activity" class="form-control">
                     <option>choose one</option>
-                    <option value="1">Sedentary</option>
-                    <option value="2">Moderately Active</option>
-                    <option value="3">Active</option>
+                    <option value="Sedentary">Sedentary</option>
+                    <option value="Moderately Active">Moderately Active</option>
+                    <option value="Active">Active</option>
                 </select>
         </div>
 
         <!-- age and height -->
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="Weight">Weight</label>
-                <input type="number" class="form-control" id="weight">
+                <label for="category">Category</label>
+                <select name="category" class="form-control">
+                    <option>Select category</option>
+                    <option value="Build Up">I want to add weight</option>
+                    <option value="Maintenance">I want to maintain my weight</option>
+                    <option value="Reducing">I want to reduce my weight</option>
+                </select>
             </div>
             <div class="form-group col-md-6">
-                <label for="height">Height</label>
-                <input type="number" class="form-control" id="height">
+                <label for="height">Height(ft)</label>
+                <input type="number" class="form-control" id="height" name="height"/>
             </div>
         </div>
 
         <!-- Gender  and age -->
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label for="age">Gender</label>
+                <label for="gender">Gender</label>
                 <select name="gender" class="form-control">
                     <option>Select gender</option>
                     <option value="M">Male</option>
@@ -79,7 +92,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="age">Age</label>
-                <input type="number" class="form-control" id="age">
+                <input type="number" class="form-control" id="age" name="age"/>
             </div>
         </div>
 
@@ -92,7 +105,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Upload Photo</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
       </div>
     </form>
     </div>

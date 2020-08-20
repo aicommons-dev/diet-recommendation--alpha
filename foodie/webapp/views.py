@@ -1,8 +1,7 @@
 from pyexpat import model
 
 # import torch
-from django.shortcuts import render, redirect
-
+from django.shortcuts import render
 
 # Create your views here.
 from fastai.basic_train import load_learner
@@ -12,31 +11,56 @@ from fastai.vision import open_image
 
 import os
 
+from .models import Foodservoire, Activity
+
 
 def home(request):
     return render(request, 'webapp/home.html')
 
 
-def dashboard(request):
-    return render(request, 'webapp/dashboard.html')
-
-
 def upload_photo(request):
     if request.method == 'POST' and request.FILES['photo']:
-        # parse the photo of the food uploaded
+        # parse the form inputs
+        activity = request.POST['activity']
+        category = request.POST['category']
+        height = request.POST['height']
+        gender = request.POST['gender']
+        age = request.POST['age']
         img = request.FILES['photo']
+
+        # Ideal Calories = IdealBody weight(Kg) * Activity Level
+        # Ideal Body weight = Height(cm) - 100
+        # convert height from feet to cm and get calculate ideal body weight
+        ideal_body_weight = (30.48 * int(height)) - 100
+        ideal_calories = ideal_body_weight * get_activity_level(activity, gender, category)
+        calories = 'Your ideal daily calories intake is ' + str(ideal_calories)
 
         # get food class from the model
         food_class = process_photo(img)
+        is_balanced, absent = describe_food_class(food_class)
+        balanced = 'Your meal is balanced' if is_balanced else 'Your meal is not balanced'
+        lacking = 'None' if balanced else 'Kindly add to your meal ' + absent
 
         prediction = {
-            'name': food_class
+            'name': food_class,
+            'calories': calories,
+            'balanced': balanced,
+            'absent': lacking
         }
 
         return render(request, 'webapp/home.html', prediction)
 
     # display empty form if new request  or filled form with error messages when an invalid was submitted
     return render(request, 'webapp/home.html')
+
+
+def describe_food_class(food):
+    result = Foodservoire.objects.filter(food_class__icontains=food)
+    if len(result) > 1:
+        return result[0].balanced, result[0].nutrients_absent
+    elif len(result) == 1:
+        return result.balanced, result.nutrients_absent
+    return None, None
 
 
 def process_photo(img):
@@ -47,9 +71,13 @@ def process_photo(img):
     # Loading the saved model using fastai's load_learner method
     model = load_learner(path, 'export.pkl')
     pred_class, pred_idx, outputs = model.predict(open_image(img))
-    # pred_class, pred_idx, outputs = model.predict(img)
+
     return str(pred_class)
 
 
-def register_user(request):
-    pass
+def get_activity_level(label, gender, category):
+    activity = Activity.objects.filter(label=label, gender=gender, category=category)
+
+    if activity is not None:
+        return activity.value
+    return 0
