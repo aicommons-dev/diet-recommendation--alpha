@@ -17,7 +17,7 @@ RUN apk update \
     && apk del build-deps
 
 # install dependencies
-RUN pip install wheel setuptools cython fastai
+RUN pip install wheel setuptools cython numpy scipy pandas matplotlib fastai
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
