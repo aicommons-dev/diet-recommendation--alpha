@@ -24,4 +24,4 @@ RUN pip install -r requirements.txt
 # copy project
 COPY . .
 
-RUN ls foodie
+RUN ls foodie/foodie

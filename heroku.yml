@@ -1,11 +1,9 @@
 build:
   docker:
     web: Dockerfile
-  config:
-    DJANGO_SETTINGS_MODULE: foodie/foodie.settings
 run:
   web: gunicorn foodie/foodie.wsgi:application --bind 0.0.0.0:$PORT
 release:
   image: web
   command:
-    - python foodie manage.py collectstatic --noinput
+    - python foodie/manage.py collectstatic --noinput
