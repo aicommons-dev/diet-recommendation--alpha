@@ -27,7 +27,7 @@ SECRET_KEY = '7k91j5bbxl!@h1g$iqsqaqldimd%g*2)bi*br@&48m!=^o2qqk'
 # SECURITY WARNING: don't run with debug turned on in production!
 # SECRET_KEY = os.environ.get('SECRET_KEY', default='foo')
 
-DEBUG = int(os.environ.get('DEBUG', default=0))
+DEBUG = int(os.environ.get('DEBUG', default=1))
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
