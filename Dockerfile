@@ -25,11 +25,11 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # collect static files
-RUN python manage.py collectstatic --noinput
+RUN  --chdir ./app/foodie/foodie python manage.py collectstatic --noinput
 
 # add and run as non-root user
 RUN adduser -D myuser
 USER myuser
 
 # run gunicorn
-CMD gunicorn --chdir ./foodie foodie.wsgi:application --log-file --bind 0.0.0.0:$PORT
+CMD gunicorn --chdir ./app/foodie foodie.wsgi:application --log-file --bind 0.0.0.0:$PORT
