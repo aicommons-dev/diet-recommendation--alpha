@@ -24,4 +24,4 @@ RUN pip install -r requirements.txt
 # copy project
 COPY . .
 
-RUN ls
+RUN ls fodie
