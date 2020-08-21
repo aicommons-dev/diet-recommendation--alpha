@@ -33,15 +33,17 @@ def upload_photo(request):
         # convert height from feet to cm and get calculate ideal body weight
         ideal_body_weight = (30.48 * int(height)) - 100
         activity_level = get_activity_level(activity, gender, category)
-        print(activity_level)
         ideal_calories = ideal_body_weight * activity_level
-        calories = 'Your ideal daily calories intake is ' + str(ideal_calories)
+        idc = f'{ideal_calories:.2f}'
+        calories = 'Your ideal daily calories intake is ' + idc
 
         # get food class from the model
         food_class = process_photo(img)
         is_balanced, absent = describe_food_class(food_class)
+        print('balanced', is_balanced, absent)
+
         balanced = 'Your meal is balanced' if is_balanced else 'Your meal is not balanced'
-        lacking = 'None' if balanced else 'Kindly add to your meal ' + absent
+        lacking = 'None' if is_balanced else 'Kindly add to your meal ' + str(absent)
 
         prediction = {
             'name': food_class,
@@ -58,7 +60,7 @@ def upload_photo(request):
 
 def describe_food_class(food):
     result = Foodservoire.objects.filter(food_class__icontains=food)
-    if len(result) > 1:
+    if len(result) > 0:
         return result[0].balanced, result[0].nutrients_absent
     return None, None
 
