@@ -23,7 +23,9 @@ BASE_DIR = str(Path(__file__).resolve(strict=True).parent.parent)
 SECRET_KEY = '7k91j5bbxl!@h1g$iqsqaqldimd%g*2)bi*br@&48m!=^o2qqk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# SECRET_KEY = os.environ.get('SECRET_KEY', default='foo')
+
+DEBUG = int(os.environ.get('DEBUG', default=0))
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -55,6 +57,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # 3rd party
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'foodie.urls'
@@ -124,3 +129,5 @@ USE_TZ = True
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
