@@ -2,7 +2,7 @@ build:
   docker:
     web: Dockerfile
 run:
-  web: gunicorn foodie/foodie.wsgi:application --bind 0.0.0.0:$PORT
+  web: gunicorn --chdir ./foodie foodie.wsgi --bind 0.0.0.0:$PORT
 release:
   image: web
   command:
