@@ -17,6 +17,7 @@ RUN apk update \
     && apk del build-deps
 
 # install dependencies
+RUN pip install wheel setuptools cython
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
