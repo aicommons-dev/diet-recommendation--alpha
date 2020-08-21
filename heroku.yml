@@ -8,4 +8,4 @@ run:
 release:
   image: web
   command:
-    - python manage.py collectstatic --noinput
+    - python /app/foodie/foodie manage.py collectstatic --noinput
