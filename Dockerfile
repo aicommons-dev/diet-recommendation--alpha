@@ -23,10 +23,6 @@ RUN pip install -r requirements.txt
 # copy project
 COPY . .
 
-# setup sqlite db
-RUN mkdir /app/db
-RUN /usr/bin/sqlite3 /db/db.sqlite3
-
 # collect static files
 RUN python manage.py collectstatic --noinput
 
