@@ -11,18 +11,18 @@ ENV DEBUG 0
 
 # install psycopg2
 RUN apk update \
-    && apk --no-cache add musl-dev linux-headers g++ \
+    && apk --no-cache add musl-dev linux-headers g++
     # build-essential make automake gcc subversion python3-dev libc-dev \
     # && apk add --virtual build-deps gcc python3-dev musl-dev \
     #&& apk add postgresql-dev \
-    && pip install -U pip
+    # && pip install -U pip
     # && pip install psycopg2 \
     #&& apk del build-essential
-
+RUN pip install --upgrade pip
 RUN echo "http://dl-8.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 RUN apk --no-cache --update-cache add gcc gfortran python3 python3-dev py-pip build-base wget freetype-dev libpng-dev openblas-dev
 RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
-RUN pip install -U pillow
+RUN pip install --upgrade pillow --no-cache-dir
 RUN pip install numpy scipy pandas matplotlib
 RUN pip install torch torchvision
 RUN pip install fastai
