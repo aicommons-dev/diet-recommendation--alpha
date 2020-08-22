@@ -18,7 +18,6 @@ RUN apk update \
 
 # install dependencies
 # RUN pip install wheel setuptools cython numpy scipy pandas matplotlib fastai
-RUN pip install fastai-1.0.61
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
