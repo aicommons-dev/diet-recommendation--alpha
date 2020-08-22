@@ -19,6 +19,7 @@ RUN apk update \
 
 # install dependencies
 RUN pip install torch_nightly -f https://download.pytorch.org/whl/nightly/cu92/torch_nightly.html
+RUN pip install torch torchvision
 # RUN pip install wheel setuptools cython numpy scipy pandas matplotlib fastai
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
