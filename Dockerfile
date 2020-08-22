@@ -18,8 +18,8 @@ RUN apk update \
     && apk del build-deps
 
 # install dependencies
-RUN pip install torch==1.6.0+cpu torchvision==0.7.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
-RUN pip install fastai
+# RUN pip install torch==1.6.0+cpu torchvision==0.7.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
+# RUN pip install fastai
 # RUN pip install wheel setuptools cython numpy scipy pandas matplotlib fastai
 COPY ./requirements.txt .
 RUN pip install -r requirements.txt
