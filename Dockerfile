@@ -11,10 +11,11 @@ ENV DEBUG 0
 
 # install psycopg2
 RUN apk update \
-    && apk --no-cache add musl-dev linux-headers g++ # build-essential make automake gcc subversion python3-dev libc-dev \
+    && apk --no-cache add musl-dev linux-headers g++
+    # build-essential make automake gcc subversion python3-dev libc-dev \
     # && apk add --virtual build-deps gcc python3-dev musl-dev \
     #&& apk add postgresql-dev \
-    && pip install -U pip \
+    && pip install -U pip
     # && pip install psycopg2 \
     #&& apk del build-essential
 
