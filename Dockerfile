@@ -19,6 +19,7 @@ RUN apk update \
     && apk del build-essential
 
 # install dependencies
+RUN pip install --upgrade cython
 RUN pip install --upgrade numpy
 RUN pip install torch==1.6.0+cpu torchvision==0.7.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
 RUN pip install fastai
