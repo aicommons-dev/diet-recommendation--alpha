@@ -12,7 +12,7 @@ ENV DEBUG 0
 # install psycopg2
 RUN pip install --upgrade pip
 RUN apk update \
-    && apk add build-essential
+    && apk add build-essential \
     && apk add --virtual build-deps musl-dev make automake gcc g++ subversion python3-dev \
     # && apk add --virtual build-deps gcc python3-dev musl-dev \
     && apk add postgresql-dev \
