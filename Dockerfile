@@ -19,7 +19,6 @@ RUN apk update \
     && apk del build-essential
 
 # install dependencies
-RUN pip install conda
 RUN conda install torch==1.6.0+cpu torchvision==0.7.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
 RUN conda install fastai
 COPY ./requirements.txt .
