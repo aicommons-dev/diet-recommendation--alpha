@@ -21,8 +21,7 @@ ENV DEBUG 0
 
 RUN apk update \
     && apk add --virtual build-deps gcc python3-dev musl-dev \
-
-    && pip install psycopg2 \
+#    && pip install psycopg2 \
     && apk add jpeg-dev zlib-dev libjpeg \
     && pip install Pillow \
     && apk del build-deps
