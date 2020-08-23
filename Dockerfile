@@ -1,6 +1,7 @@
 # pull official base image
 # FROM python:3.7-alpine
-FROM python:3.8-slim-buster AS stage1
+FROM python:3.8-slim-buster
+#FROM python:3.8-slim-buster AS stage1
 
 # set work directory
 WORKDIR /app
@@ -25,8 +26,11 @@ RUN python3 -m pip install -r requirements.txt
 # copy project
 COPY . .
 
+RUN python foodie/manage.py collectstatic --noinput
+CMD gunicorn --chdir ./foodie foodie.wsgi --bind 0.0.0.0:$PORT
+
 # stage2
-FROM python:3.7-alpine
+#FROM python:3.7-alpine
 # copy project
-COPY --from=stage1 . .
-ENTRYPOINT ["."]
+#COPY --from=stage1 . .
+#ENTRYPOINT ["."]
