@@ -33,8 +33,8 @@ RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
 RUN python3 -m pip install scikit-learn
 #RUN pip install numpy scipy pandas matplotlib
 #RUN pip install torch torchvision
-RUN python3 -m pip install torch==1.6.0+cpu torchvision==0.7.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
-RUN python3 -m pip install fastai
+# RUN python3 -m pip install torch==1.6.0+cpu torchvision==0.7.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
+# RUN python3 -m pip install fastai
 
 
 
