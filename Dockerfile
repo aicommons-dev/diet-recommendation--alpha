@@ -23,11 +23,11 @@ ENV DEBUG 0
 RUN apt-get update -y
 RUN apt-get -y install libc-dev
 RUN apt-get -y install build-essential
-RUN apt-get --no-cache --update-cache add gcc gfortran python3 python3-dev py-pip build-base wget freetype-dev libpng-dev openblas-dev \
-    && apt-get install gcc python3-dev musl-dev py3-zipp \
-#    && pip install psycopg2 \
-    && apt-get install jpeg-dev zlib-dev libjpeg \
-    && pip install Pillow
+#RUN apt-get -y install gcc gfortran python3 python3-dev py-pip build-base wget freetype-dev libpng-dev openblas-dev \
+#    && apt-get install gcc python3-dev musl-dev py3-zipp \
+##    && pip install psycopg2 \
+#    && apt-get install jpeg-dev zlib-dev libjpeg \
+#    && pip install Pillow
 
 RUN pip install --upgrade pip
 RUN python3 -m pip install scikit-learn
