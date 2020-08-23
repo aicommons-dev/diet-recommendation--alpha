@@ -21,11 +21,11 @@ ENV DEBUG 0
     #&& apk del build-essential
 
 RUN apt-get update -y \
-    && apk install --virtual build-deps gcc python3-dev musl-dev py3-zipp \
+    && apt-get install --virtual build-deps gcc python3-dev musl-dev py3-zipp \
 #    && pip install psycopg2 \
-    && ap-get install jpeg-dev zlib-dev libjpeg \
+    && apt-get install jpeg-dev zlib-dev libjpeg \
     && pip install Pillow \
-    && ap-get del build-deps
+    && apt-get del build-deps
 
 RUN pip install --upgrade pip
 RUN echo "http://dl-8.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
