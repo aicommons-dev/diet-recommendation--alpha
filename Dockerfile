@@ -1,6 +1,6 @@
 # pull official base image
 # FROM python:3.7-alpine
-FROM python:3.7-slim-buster
+FROM python:3.7-alpine
 #FROM python:3.8-slim-buster AS stage1
 
 # set work directory
@@ -17,7 +17,6 @@ ENV DEBUG 1
 
 # RUN pip install --upgrade pip
 RUN python3 -m pip install torch==1.6.0+cpu torchvision==0.7.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
-RUN python3 -m pip install psycopg2
 
 
 COPY ./requirements.txt .
