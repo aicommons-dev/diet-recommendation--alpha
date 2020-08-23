@@ -1,6 +1,6 @@
 # pull official base image
 # FROM python:3.7-alpine
-FROM python:3.8-slim-buster
+FROM python:3.7-slim-buster
 #FROM python:3.8-slim-buster AS stage1
 
 # set work directory
