@@ -30,13 +30,14 @@ RUN pip install --upgrade pip
 RUN echo "http://dl-8.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 RUN apk --no-cache --update-cache add gcc gfortran python3 python3-dev py-pip build-base wget freetype-dev libpng-dev openblas-dev
 RUN ln -s /usr/include/locale.h /usr/include/xlocale.h
-# RUN python3 -m pip install scikit-learn
-#RUN pip install numpy scipy pandas matplotlib
+RUN python3 -m pip install scikit-learn
+RUN python3 -m pip install numpy scipy pandas matplotlib
+
 #RUN pip install torch torchvision
 # RUN python3 -m pip install torch==1.6.0+cpu torchvision==0.7.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
 
 
-RUN python3 -m pip install numpy
+# RUN python3 -m pip install numpy
 RUN python3 -m pip install --pre torch torchvision -f https://download.pytorch.org/whl/nightly/cpu/torch_nightly.html
 RUN python3 -m pip install fastai
 
@@ -51,5 +52,3 @@ RUN pip install -r requirements.txt
 
 # copy project
 COPY . .
-
-RUN ls foodie/foodie
