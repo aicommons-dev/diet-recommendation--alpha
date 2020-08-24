@@ -23,7 +23,7 @@ class Activity(models.Model):
 class Calorie(models.Model):
     food_class = models.CharField(max_length=50, blank=False)
     measurement = models.CharField(max_length=10, blank=True)
-    description = models.CharField(max_length=50,blank=True)
+    description = models.CharField(max_length=50, blank=True)
     calories = models.IntegerField(blank=False)
 
     def __str__(self):
@@ -44,6 +44,10 @@ class Foodservoire(models.Model):
     nutrients_present = MultiSelectField(choices=nutrient_classes, max_choices=6, blank=False)
     nutrients_absent = MultiSelectField(choices=nutrient_classes, max_choices=5, blank=True)
     balanced = models.BooleanField()
+    major_nutrients = models.CharField(max_length=500, blank=True)
+    major_nutrients_functions = models.CharField(max_length=500, blank=True)
+    food_complement = models.CharField(max_length=500, blank=True)
+    deficient_nutrients = models.CharField(max_length=500, blank=True)
 
     def __str__(self):
         return self.food_class
