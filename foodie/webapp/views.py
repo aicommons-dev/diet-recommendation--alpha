@@ -38,31 +38,38 @@ def upload_photo(request):
         calories = 'Your ideal daily calories intake is ' + idc
 
         # get food class from the model
-        food_class = process_photo(img)
-        is_balanced, absent = describe_food_class(food_class)
-        print('balanced', is_balanced, absent)
+        food_name = process_photo(img)
+        food_obj = get_food_class(food_name)
+        if food_obj is not None:
+            print(food_obj)
+            balanced = 'Your meal is balanced' if food_obj.balanced else 'Your meal is not balanced'
+            lacking = 'None' if balanced else f'Your meal lacks {food_obj.nutrients_absent}'
+            desc = f'Your meal is rich in {food_obj.major_nutrients} ' \
+                   f'which is good for {food_obj.major_nutrients_functions}'
+            deficient = food_obj.deficient_nutrients
+            complement = food_obj.food_complement
 
-        balanced = 'Your meal is balanced' if is_balanced else 'Your meal is not balanced'
-        lacking = 'None' if is_balanced else 'Kindly add to your meal ' + str(absent)
+            prediction = {
+                'name': food_obj.food_class,
+                'calories': calories,
+                'balanced': balanced,
+                'description': desc,
+                'absent': lacking,
+                'deficient': deficient,
+                'complement': complement
+            }
 
-        prediction = {
-            'name': food_class,
-            'calories': calories,
-            'balanced': balanced,
-            'absent': lacking
-        }
+            return render(request, 'webapp/home.html', prediction)
 
-        return render(request, 'webapp/home.html', prediction)
-
-    # display empty form if new request  or filled form with error messages when an invalid was submitted
-    return render(request, 'webapp/home.html')
+        return render(request, 'webapp/home.html', {'name': 'Unidentified food class. I\'m still learning new food '
+                                                            'classes.'})
 
 
-def describe_food_class(food):
-    result = Foodservoire.objects.filter(food_class__icontains=food)
-    if len(result) > 0:
-        return result[0].balanced, result[0].nutrients_absent
-    return None, None
+def get_food_class(food_class):
+    food = Foodservoire.objects.filter(food_class__icontains=food_class)
+    if len(food) > 0:
+        return food[0]
+    return None
 
 
 def process_photo(img):
