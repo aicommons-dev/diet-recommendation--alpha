@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %} Balanced Foodie | Home {% endblock %}
+{% block title %} DietAI | Home {% endblock %}
 {% block content %}
     <!-- Sign Up Form -->
         <div id="get-started" class="py-4" style="background-color: #d8e6db;">
@@ -49,7 +49,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-    <form method="post" action="foodie/upload_photo/" enctype="multipart/form-data">
+    <form method="post" action="{% url 'upload_photo' %}" enctype="multipart/form-data">
         {% csrf_token %}
       <div class="modal-body">
 
