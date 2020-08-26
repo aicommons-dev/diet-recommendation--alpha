@@ -41,28 +41,25 @@ def upload_photo(request):
         food_name = process_photo(img)
         food_obj = get_food_class(food_name)
         if food_obj is not None:
-            print(food_obj)
-            balanced = 'Your meal is balanced' if food_obj.balanced else 'Your meal is not balanced'
-            lacking = 'None' if balanced else f'Your meal lacks {food_obj.nutrients_absent}'
-            desc = f'Your meal is rich in {food_obj.major_nutrients} ' \
+            balanced = 'Your meal is balanced. Keep it up.' if food_obj.balanced \
+                else f'Your meal lacks {str(food_obj.nutrients_absent).title()} '
+            desc = f'Your meal is rich in {str(food_obj.major_nutrients).title()} ' \
                    f'which is good for {food_obj.major_nutrients_functions}'
-            deficient = food_obj.deficient_nutrients
-            complement = food_obj.food_complement
+            complement = f'Your meal can be supplemented with foods rich in {str(food_obj.deficient_nutrients).title()} ' \
+                         f'such as {food_obj.food_complement}. Remember to drink lots of water for proper digestion.'
 
             prediction = {
-                'name': food_obj.food_class,
+                'name': food_obj.food_class.title(),
                 'calories': calories,
                 'balanced': balanced,
                 'description': desc,
-                'absent': lacking,
-                'deficient': deficient,
-                'complement': complement
+                'complement': complement if food_obj.food_complement is not None else ''
             }
 
             return render(request, 'webapp/home.html', prediction)
 
-        return render(request, 'webapp/home.html', {'name': 'Unidentified food class. I\'m still learning new food '
-                                                            'classes.'})
+        return render(request, 'webapp/home.html', {'name': 'Unidentified food class. I\'ll keep learning new food '
+                                                            'classes to improve my knowledge base.'})
 
 
 def get_food_class(food_class):
