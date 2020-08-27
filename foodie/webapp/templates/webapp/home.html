@@ -29,6 +29,7 @@
                           <li class="list-group-item list-group-item-success">Diet: <span class="label-values">{{balanced}}</span> </li>
                           <li class="list-group-item list-group-item-secondary">Description: <span class="label-values">{{description}}</span> </li>
                           <li class="list-group-item list-group-item-warning">Complement: <span class="label-values">{{complement}}</span></li>
+                          <li class="list-group-item list-group-item-danger">Disease Condition: <span class="label-values">{{disease}}</span></li>
                           <li class="list-group-item list-group-item-info">Additional Information: <span class="label-values">{{calories}}</span></li>
                         </ul>
 
@@ -53,15 +54,27 @@
         {% csrf_token %}
       <div class="modal-body">
 
-      <!-- activity level -->
-        <div class="form-group">
-            <label for="activity">Activity Level</label>
+      <!-- activity level and disease condition -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="activity">Activity Level</label>
                 <select name="activity" class="form-control" required>
                     <option>choose one</option>
                     <option value="Sedentary">Sedentary</option>
                     <option value="Moderately Active">Moderately Active</option>
                     <option value="Active">Active</option>
                 </select>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="age">Disease Condition</label>
+                <select name="disease" class="form-control">
+                    <option value="null">optional</option>
+                    <option value="DBM">Diabetes Mellitus</option>
+                    <option value="CKD">Chronic Kidney Disease</option>
+                    <option value="TBC">Tuberculosis</option>
+                </select>
+            </div>
         </div>
 
         <!-- age and height -->

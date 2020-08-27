@@ -11,7 +11,7 @@ from fastai.vision import open_image
 
 import os
 
-from .models import Foodservoire, Activity
+from .models import Foodservoire, Activity, Disease
 
 
 def home(request):
@@ -22,14 +22,13 @@ def upload_photo(request):
     if request.method == 'POST' and request.FILES['photo']:
         # parse the form inputs
         activity = request.POST['activity']
+        disease = request.POST['disease']
         category = request.POST['category']
         height = request.POST['height']
         gender = request.POST['gender']
         age = request.POST['age']
         img = request.FILES['photo']
 
-        # Ideal Calories = IdealBody weight(Kg) * Activity Level
-        # Ideal Body weight = Height(cm) - 100
         # convert height from feet to cm and get calculate ideal body weight
         ideal_body_weight = (30.48 * int(height)) - 100
         activity_level = get_activity_level(activity, gender, category)
@@ -53,13 +52,25 @@ def upload_photo(request):
                 'calories': calories,
                 'balanced': balanced,
                 'description': desc,
-                'complement': complement if food_obj.food_complement is not None else ''
+                'complement': complement if food_obj.food_complement is not None else '',
+                'disease': get_disease_recommendation(disease)
             }
 
             return render(request, 'webapp/home.html', prediction)
 
         return render(request, 'webapp/home.html', {'name': 'Unidentified food class. I\'ll keep learning new food '
                                                             'classes to improve my knowledge base.'})
+
+
+def get_disease_recommendation(disease):
+    if disease == 'null':
+        return 'No disease condition'
+    dis = Disease.objects.filter(code=disease)
+    dis = dis[0]
+    print(dis)
+    recommendation = f'You indicated {dis.name}. You should add {dis.take_nutrient} ' \
+                     f'to your meals and avoid {dis.avoid_nutrient}'
+    return recommendation
 
 
 def get_food_class(food_class):

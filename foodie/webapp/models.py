@@ -50,3 +50,13 @@ class Foodservoire(models.Model):
 
     def __str__(self):
         return self.food_class
+
+
+class Disease(models.Model):
+    code = models.CharField(max_length=3, blank=False)
+    name = models.CharField(max_length=50, blank=False)
+    take_nutrient = models.CharField(max_length=500, blank=True)
+    avoid_nutrient = models.CharField(max_length=500, blank=True)
+
+    def __str__(self):
+        return self.name
