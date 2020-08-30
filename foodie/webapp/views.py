@@ -9,6 +9,9 @@ from fastai.core import defaults
 from fastai.imports import torch
 from fastai.vision import open_image
 
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
+
 import os
 
 from .models import Foodservoire, Activity, Disease
@@ -60,6 +63,12 @@ def upload_photo(request):
 
         return render(request, 'webapp/home.html', {'name': 'Unidentified food class. I\'ll keep learning new food '
                                                             'classes to improve my knowledge base.'})
+
+
+def correct_model(file, corrected):
+    g_login = GoogleAuth()
+    g_login.LocalWebserverAuth()
+    drive = GoogleDrive(g_login)
 
 
 def get_disease_recommendation(disease):

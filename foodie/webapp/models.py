@@ -60,3 +60,10 @@ class Disease(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Correction(models.Model):
+    sn = models.IntegerField()
+    old_name = models.CharField(maxlength=50)
+    suggested_name = models.CharField(maxlength=50)
+    food_img = models.CharField(maxlength=50)
